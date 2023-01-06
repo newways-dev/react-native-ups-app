@@ -8,6 +8,12 @@ type CustomerList = {
   value: Customer
 }
 
+type TrackingItem = {
+  customer_id: ID
+  customer: Customer
+  items: Item[]
+}
+
 type Item = {
   item_id: ID
   name: string
@@ -15,10 +21,8 @@ type Item = {
   quantity: number
 }
 
-type TrackingItem = {
-  customer_id: ID
-  customer: Customer
-  items: Item[]
+type OrderResponce = {
+  value: Order
 }
 
 type Order = {
@@ -31,10 +35,6 @@ type Order = {
   Lat: number
   Lng: number
   trackingItems: TrackingItem
-}
-
-type OrderResponce = {
-  value: Order
 }
 
 type CustomerResponce = {

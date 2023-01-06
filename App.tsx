@@ -10,8 +10,11 @@ import RootNavigator from './navigation/RootNavigator'
 import utilities from './tailwind.json'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5001/api/illmannered-mandrill',
+  uri: 'https://niteroi.stepzen.net/api/illmannered-mandrill/__graphql',
   cache: new InMemoryCache(),
+  headers: {
+    Authorization: `Apikey niteroi::stepzen.net+1000::94e0ac4f39280281567db5bec241564cdb4d6ab50983685b9ba97890724c01fc`,
+  },
 })
 
 export default function App() {

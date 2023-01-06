@@ -9,26 +9,28 @@ const useCustomerOrders = (userId: string) => {
   useEffect(() => {
     if (!data) return
 
-    const orders: Order[] = data.getOrders.map(({ value }: OrderResponce) => ({
-      carrier: value.carrier,
-      createdAt: value.createdAt,
-      shippingCost: value.shippingCost,
-      trackingId: value.trackingId,
-      Address: value.Address,
-      City: value.City,
-      Lat: value.Lat,
-      Lng: value.Lng,
-      trackingItems: value.trackingItems,
-    }))
+    const getOrders: Order[] = data.getOrders.map(
+      ({ value }: OrderResponce) => ({
+        carrier: value.carrier,
+        createdAt: value.createdAt,
+        shippingCost: value.shippingCost,
+        trackingId: value.trackingId,
+        Address: value.Address,
+        City: value.City,
+        Lat: value.Lat,
+        Lng: value.Lng,
+        trackingItems: value.trackingItems,
+      })
+    )
 
-    const customerOrders = orders.filter(
+    const customerOrders = getOrders.filter(
       (order) => order.trackingItems.customer_id === userId
     )
 
     setOrders(customerOrders)
   }, [data, userId])
 
-  return { orders, error, loading }
+  return { orders, loading, error }
 }
 
 export default useCustomerOrders
