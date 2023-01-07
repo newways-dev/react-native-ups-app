@@ -1,6 +1,7 @@
 import { Card, Divider, Icon } from '@rneui/themed'
 import { Text, View } from 'react-native'
 import { useTailwind } from 'tailwind-rn/dist'
+import MapView, { Marker } from 'react-native-maps'
 
 type DeliveryCardProps = {
   order: Order
@@ -37,7 +38,7 @@ const DeliveryCard = ({ order }: DeliveryCardProps) => {
           </Text>
           <Divider color='white' />
         </View>
-        <View style={[tw('mx-auto')]}>
+        <View style={[tw('mx-auto'), { paddingBottom: 15 }]}>
           <Text style={tw('text-base text-center text-white font-bold mt-5')}>
             Address
           </Text>
@@ -58,6 +59,24 @@ const DeliveryCard = ({ order }: DeliveryCardProps) => {
           </View>
         ))}
       </View>
+      <MapView
+        initialRegion={{
+          latitude: order.Lat,
+          longitude: order.Lng,
+          latitudeDelta: 0.005,
+          longitudeDelta: 0.005,
+        }}
+        style={[tw('w-full'), { height: 200 }]}
+      >
+        {order.Lat && order.Lng && (
+          <Marker
+            coordinate={{ latitude: order.Lat, longitude: order.Lng }}
+            title='Delivery Location'
+            description={order.Address}
+            identifier='destination'
+          />
+        )}
+      </MapView>
     </Card>
   )
 }
